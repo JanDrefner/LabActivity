@@ -2,6 +2,12 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model Instructor
+@{
+    string status = Model.IsTenured == true ? "Permanent" : "Probationary";
+    var today = DateTime.Now;
+    var joblen = today.Subtract(Model.HiringDate);
+}
+
 
 <h1>Instructor Details</h1>
 
@@ -20,7 +26,7 @@
     </tr>
     <tr>
         <th>Is Tenured</th>
-        <td>@Model.IsTenured</td>
+        <td>@status</td>
     </tr>
     <tr>
         <th>Rank</th>

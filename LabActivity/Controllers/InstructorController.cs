@@ -15,7 +15,7 @@ namespace Santos_IT_ELEC1C.Controllers
                 LastName = "Montano",
                 IsTenured = true,
                 InstructorRank = Rank.Professor,
-                HiringDate = DateTime.Now,
+                HiringDate = DateTime.Parse("09/05/2021")
             },
             new Instructor()
             {
@@ -24,7 +24,7 @@ namespace Santos_IT_ELEC1C.Controllers
                 LastName = "Lintag",
                 IsTenured = false,
                 InstructorRank = Rank.AssistantProfessor,
-                HiringDate = DateTime.Now,
+                HiringDate = DateTime.Parse("01/11/2021")
             },
             new Instructor()
             {
@@ -33,7 +33,7 @@ namespace Santos_IT_ELEC1C.Controllers
                 LastName = "Zhuo",
                 IsTenured = true,
                 InstructorRank = Rank.AssociateProfessor,
-                HiringDate = DateTime.Now,
+                HiringDate = DateTime.Parse("07/25/2021")
             },
         };
 
