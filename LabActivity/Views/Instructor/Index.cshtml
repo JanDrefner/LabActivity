@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Instructor List</h1>
+<table class="table table-dark table-hover">
+
+    <tr>
+        <th colspan="6">Instructor</th>
+    </tr>
+
+    <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Instructor Details</th>
+    </tr>
+    @foreach (var Instructor in Model)
+    {
+        <tr>
+            <th>@Instructor.Id</th>
+            <td>@Instructor.FirstName</td>
+            <td>@Instructor.LastName</td>
+            <td><a asp-action="ShowDetail" asp-route-id ="@Instructor.Id">Show Details</a></td>
+        </tr>
+    }
+</table>
+
