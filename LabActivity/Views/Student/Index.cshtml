@@ -7,7 +7,6 @@
 
 <div>Student List</div>
 
-
 <table class="table table-dark table-hover">
 
     <tr>
@@ -21,6 +20,7 @@
         <th>Email</th>
         <th>GPA</th>
         <th>Details</th>
+        
 
 
     </tr>
@@ -33,7 +33,7 @@
             <td>@student.Email</td>
             <td>@student.GPA</td>
             <td><a class="btn btn-warning" asp-action="ShowDetail" asp-route-id="@student.Id">Show Details</a></td>
-
         </tr>
     }
 </table>
+<a class="btn btn-warning" asp-action="AddStudent">Add a Student</a>

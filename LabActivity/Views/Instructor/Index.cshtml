@@ -3,28 +3,36 @@
 *@
 @{
 }
+@model IEnumerable<Instructor>;
 
 <h1>Instructor List</h1>
 <table class="table table-dark table-hover">
 
     <tr>
-        <th colspan="6">Instructor</th>
+        <th colspan="8">Instructor</th>
     </tr>
 
     <tr>
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
+        <th>Status</th>
+        <th>Instructor Rank</th>
+        <th>Hiring Date</th>
         <th>Instructor Details</th>
     </tr>
     @foreach (var Instructor in Model)
     {
+        string status = Instructor.IsTenured == true ? "Permanent" : "Probationary";
         <tr>
             <th>@Instructor.Id</th>
             <td>@Instructor.FirstName</td>
             <td>@Instructor.LastName</td>
+            <td>@status</td>
+            <td>@Instructor.InstructorRank</td>
+            <td>@Instructor.HiringDate</td>
             <td><a class="btn btn-warning" asp-action="ShowDetail" asp-route-id ="@Instructor.Id">Show Details</a></td>
         </tr>
     }
 </table>
-
+<a class="btn btn-warning" asp-action="AddInstructor">Add an Instructor</a>

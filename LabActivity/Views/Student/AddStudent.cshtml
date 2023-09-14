@@ -1,0 +1,48 @@
+﻿@{
+}
+@model Student;
+<form asp-action="AddStudent" asp-controller="Student" method="post">
+    <div class="row">
+        <div class="form-group col">
+            <label asp-for="Id">ID Number</label>
+            <input class="form-control" asp-for="Id" aria-describedby="IdHelp">
+        </div>
+        <br />
+        <div class="form-group col">
+            <label asp-for="FirstName">First Name</label>
+            <input class="form-control" asp-for="FirstName" autocomplete="off">
+        </div>
+        <br />
+        <div class="form-group col">
+            <label asp-for="LastName">Last Name</label>
+            <input class="form-control" asp-for="LastName" autocomplete="off">
+        </div>
+    </div>
+    
+    <br />
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input class="form-control" asp-for="Email" autocomplete="off">
+    </div>
+    <br />
+    <div class="row">
+        <div class="form-group col">
+            <label asp-for="GPA">GPA</label>
+            <input step="0.01" class="form-control" asp-for="GPA">
+        </div>
+        <div class="form-group col">
+            <label asp-for="AdmissionDate">Admission Date</label>
+            <input asp-for="AdmissionDate" class="form-control">
+        </div>
+        <div class="form-group col">
+            <label asp-for="Course">Course</label>
+            <select class="form-control form-select" asp-items="@Html.GetEnumSelectList(typeof(Course))" aria-describedby="CourseHelp" placeholder="Select Student Course" asp-for="Course">
+            </select>
+        </div>
+    </div>
+    
+    <br />
+    
+    <br />
+    <button type="submit" class="btn btn-warning">Submit</button>
+</form>
