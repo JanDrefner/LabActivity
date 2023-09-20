@@ -1,12 +1,12 @@
 ﻿@{
 }
 @model Student;
-<h1>Add Student</h1>
-<form asp-action="AddStudent" asp-controller="Student" method="post">
+<h1>Update Student</h1>
+<form asp-action="UpdateStudent" asp-controller="Student" method="post">
     <div class="row">
         <div class="form-group col">
-            <label asp-for="Id">ID Number</label>
-            <input class="form-control" asp-for="Id" aria-describedby="IdHelp">
+            <label asp-for="Id" readonly>ID Number</label>
+            <input class="form-control" asp-for="Id" aria-describedby="IdHelp" readonly>
         </div>
         <br />
         <div class="form-group col">
@@ -19,7 +19,7 @@
             <input class="form-control" asp-for="LastName" autocomplete="off">
         </div>
     </div>
-    
+
     <br />
     <div class="form-group">
         <label asp-for="Email">Email</label>
@@ -41,9 +41,10 @@
             </select>
         </div>
     </div>
-    
+
     <br />
-    
+
     <br />
-    <button type="submit" class="btn btn-warning">Submit</button>
+    <button type="submit" class="btn btn-warning">Update</button>
+    <button type="button" class="btn btn-secondary" onclick="history.back()">Cancel</button>
 </form>
