@@ -33,7 +33,7 @@ namespace Santos_IT_ELEC1C.Controllers
                 LastName = "Zhuo",
                 IsTenured = true,
                 InstructorRank = Rank.AssociateProfessor,
-                HiringDate = DateTime.Parse("07/25/2021")
+                HiringDate = DateTime.Now
             },
         };
 
@@ -64,6 +64,32 @@ namespace Santos_IT_ELEC1C.Controllers
         {
             InstructorList.Add(newInstructor);
             return View("Index", InstructorList);
+        }
+        [HttpGet]
+        public IActionResult UpdateInstructor(int id)
+        {
+            //Search for the instructor whose id matches the given id
+            Instructor? instructor = InstructorList.FirstOrDefault(inst => inst.Id == id);
+
+            if (instructor != null)//was an instructor found?
+                return View(instructor);
+
+            return NotFound();
+        }
+        [HttpPost]
+        public IActionResult UpdateInstructor(Instructor instructorChanges)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(inst => inst.Id == instructorChanges.Id);
+
+            if (instructor != null) 
+            { 
+                instructor.FirstName = instructorChanges.FirstName;
+                instructor.LastName = instructorChanges.LastName;
+                instructor.InstructorRank = instructorChanges.InstructorRank;
+                instructor.HiringDate = instructorChanges.HiringDate;
+                instructor.IsTenured = instructorChanges.IsTenured;
+            }
+                return View("Index", InstructorList);
         }
     }
 }

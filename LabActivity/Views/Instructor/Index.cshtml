@@ -20,6 +20,7 @@
         <th>Instructor Rank</th>
         <th>Hiring Date</th>
         <th>Instructor Details</th>
+        <th>Update</th>
     </tr>
     @foreach (var Instructor in Model)
     {
@@ -32,6 +33,7 @@
             <td>@Instructor.InstructorRank</td>
             <td>@Instructor.HiringDate</td>
             <td><a class="btn btn-warning" asp-action="ShowDetail" asp-route-id ="@Instructor.Id">Show Details</a></td>
+            <td><a class="btn btn-warning" asp-action="UpdateInstructor" asp-route-id="@Instructor.Id">Update Instructor</a></td>
         </tr>
     }
 </table>
