@@ -76,5 +76,24 @@ namespace LabActivity.Controllers
             }
             return View("Index",StudentList);
         }
+        [HttpGet]
+        public IActionResult DeleteStudent(int id)
+        {
+            //Search for the student whose id matches the given id
+            Student? student = StudentList.FirstOrDefault(st => st.Id == id);
+
+            if (student != null)//was an student found?
+                return View(student);
+
+            return NotFound();
+        }
+        [HttpPost]
+        public IActionResult DeleteStudent(Student newStudent)
+        {
+            Student? student = StudentList.FirstOrDefault(st => st.Id == newStudent.Id);
+            if (student != null)
+                StudentList.Remove(student);
+            return View("Index", StudentList);
+        }
     }
 }

@@ -1,0 +1,50 @@
+﻿@{
+}
+@model Student;
+<h1>Are you sure you want to delete?</h1>
+<form asp-action="DeleteStudent" asp-controller="Student" method="post">
+    <div class="row">
+        <div class="form-group col">
+            <label asp-for="Id" readonly>ID Number</label>
+            <input class="form-control" asp-for="Id" aria-describedby="IdHelp" readonly>
+        </div>
+        <br />
+        <div class="form-group col">
+            <label asp-for="FirstName">First Name</label>
+            <input class="form-control" asp-for="FirstName" autocomplete="off" readonly>
+        </div>
+        <br />
+        <div class="form-group col">
+            <label asp-for="LastName">Last Name</label>
+            <input class="form-control" asp-for="LastName" autocomplete="off" readonly>
+        </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input class="form-control" asp-for="Email" autocomplete="off" readonly>
+    </div>
+    <br />
+    <div class="row">
+        <div class="form-group col">
+            <label asp-for="GPA">GPA</label>
+            <input step="0.01" class="form-control" asp-for="GPA" readonly>
+        </div>
+        <div class="form-group col">
+            <label asp-for="AdmissionDate">Admission Date</label>
+            <input asp-for="AdmissionDate" class="form-control" readonly>
+        </div>
+        <div class="form-group col">
+            <label asp-for="Course">Course</label>
+            <select class="form-control form-select" asp-items="@Html.GetEnumSelectList(typeof(Course))" aria-describedby="CourseHelp" placeholder="Select Student Course" asp-for="Course" disabled>
+            </select>
+        </div>
+    </div>
+
+    <br />
+
+    <br />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <button type="button" class="btn btn-secondary" onclick="history.back()">Cancel</button>
+</form>
