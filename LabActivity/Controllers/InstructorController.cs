@@ -1,24 +1,24 @@
-﻿using LabActivity.Models;
-using LabActivity.Services;
+﻿using LabActivity.Data;
+using LabActivity.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Santos_IT_ELEC1C.Controllers
+namespace LabActivity.Controllers
 {
     public class InstructorController : Controller
     {
-            private readonly IMyFakeDataService _dummyData;
-            public InstructorController(IMyFakeDataService dummydata)
-            {
-                _dummyData = dummydata;
-            }
-            public IActionResult Index()
+        private readonly AppDbContext _dbData;
+        public InstructorController(AppDbContext dbData)
         {
-            return View(_dummyData.InstructorList);
+            _dbData = dbData;
+        }
+        public IActionResult Index()
+        {
+            return View(_dbData.Instructors);
         }
         public IActionResult ShowDetail(int id)
         {
             //Search for the instructor whose id matches the given id
-            Instructor? instructor = _dummyData.InstructorList.FirstOrDefault(inst => inst.Id == id);
+            Instructor? instructor = _dbData.Instructors.FirstOrDefault(ins => ins.Id == id);
 
             if (instructor != null)//was an instructor found?
                 return View(instructor);
@@ -29,21 +29,27 @@ namespace Santos_IT_ELEC1C.Controllers
         [HttpGet]
         public IActionResult AddInstructor()
         {
-
             return View();
         }
 
         [HttpPost]
         public IActionResult AddInstructor(Instructor newInstructor)
         {
-            _dummyData.InstructorList.Add(newInstructor);
+            if (!ModelState.IsValid)
+            {
+                return View();
+                _dbData.Instructors.Add(newInstructor);
                 return RedirectToAction("Index");
+            }
+            _dbData.Instructors.Add(newInstructor);
+            _dbData.SaveChanges();
+            return RedirectToAction("Index");
             }
         [HttpGet]
         public IActionResult UpdateInstructor(int id)
         {
             //Search for the instructor whose id matches the given id
-            Instructor? instructor = _dummyData.InstructorList.FirstOrDefault(inst => inst.Id == id);
+            Instructor? instructor = _dbData.Instructors.FirstOrDefault(ins => ins.Id == id);
 
             if (instructor != null)//was an instructor found?
                 return View(instructor);
@@ -53,7 +59,7 @@ namespace Santos_IT_ELEC1C.Controllers
         [HttpPost]
         public IActionResult UpdateInstructor(Instructor instructorChanges)
         {
-            Instructor? instructor = _dummyData.InstructorList.FirstOrDefault(inst => inst.Id == instructorChanges.Id);
+            Instructor? instructor = _dbData.Instructors.FirstOrDefault(ins => ins.Id == instructorChanges.Id);
 
             if (instructor != null) 
             { 
@@ -62,6 +68,7 @@ namespace Santos_IT_ELEC1C.Controllers
                 instructor.InstructorRank = instructorChanges.InstructorRank;
                 instructor.HiringDate = instructorChanges.HiringDate;
                 instructor.IsTenured = instructorChanges.IsTenured;
+                _dbData.SaveChanges();
             }
                 return RedirectToAction("Index");
             }
@@ -69,7 +76,7 @@ namespace Santos_IT_ELEC1C.Controllers
         public IActionResult DeleteInstructor(int id)
         {
             //Search for the instructor whose id matches the given id
-            Instructor? instructor = _dummyData.InstructorList.FirstOrDefault(inst => inst.Id == id);
+            Instructor? instructor = _dbData.Instructors.FirstOrDefault(ins => ins.Id == id);
 
             if (instructor != null)//was an instructor found?
                 return View(instructor);
@@ -79,10 +86,11 @@ namespace Santos_IT_ELEC1C.Controllers
         [HttpPost]
         public IActionResult DeleteInstructor(Instructor newInstructor)
         {
-            Instructor? instructor = _dummyData.InstructorList.FirstOrDefault(inst => inst.Id == newInstructor.Id);
+            Instructor? instructor = _dbData.Instructors.FirstOrDefault(ins => ins.Id == newInstructor.Id);
             if (instructor != null)
-                _dummyData.InstructorList.Remove(instructor);
-                return RedirectToAction("Index");
+                _dbData.Instructors.Remove(instructor);
+            _dbData.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

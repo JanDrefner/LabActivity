@@ -2,41 +2,45 @@
 }
 @model Student;
 <h1>Add Student</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
 <form asp-action="AddStudent" asp-controller="Student" method="post">
     <div class="row">
-        <div class="form-group col">
-            <label asp-for="Id">ID Number</label>
-            <input class="form-control" asp-for="Id" aria-describedby="IdHelp">
-        </div>
         <br />
         <div class="form-group col">
-            <label asp-for="FirstName">First Name</label>
+            <label asp-for="FirstName"></label>
             <input class="form-control" asp-for="FirstName" autocomplete="off">
         </div>
         <br />
         <div class="form-group col">
-            <label asp-for="LastName">Last Name</label>
+            <label asp-for="LastName"></label>
             <input class="form-control" asp-for="LastName" autocomplete="off">
         </div>
     </div>
     
     <br />
-    <div class="form-group">
-        <label asp-for="Email">Email</label>
-        <input class="form-control" asp-for="Email" autocomplete="off">
+    <div class="row">
+        <div class="form-group col">
+            <label asp-for="Email"></label>
+            <input class="form-control" asp-for="Email" autocomplete="off">
+        </div>
+        <div class="form-group col">
+            <label asp-for="PhoneNumber"></label>
+            <input class="form-control" asp-for="PhoneNumber" autocomplete="off">
+        </div>
     </div>
+    
     <br />
     <div class="row">
         <div class="form-group col">
-            <label asp-for="GPA">GPA</label>
+            <label asp-for="GPA"></label>
             <input step="0.01" class="form-control" asp-for="GPA">
         </div>
         <div class="form-group col">
-            <label asp-for="AdmissionDate">Admission Date</label>
+            <label asp-for="AdmissionDate"></label>
             <input asp-for="AdmissionDate" class="form-control">
         </div>
         <div class="form-group col">
-            <label asp-for="Course">Course</label>
+            <label asp-for="Course"></label>
             <select class="form-control form-select" asp-items="@Html.GetEnumSelectList(typeof(Course))" aria-describedby="CourseHelp" placeholder="Select Student Course" asp-for="Course">
             </select>
         </div>

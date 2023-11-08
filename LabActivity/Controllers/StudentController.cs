@@ -1,28 +1,26 @@
-﻿using LabActivity.Models;
-using LabActivity.Services;
+﻿using LabActivity.Data;
+using LabActivity.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LabActivity.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly IMyFakeDataService _dummyData;
-        public StudentController(IMyFakeDataService dummydata) 
+        private readonly AppDbContext _dbData;
+        public StudentController(AppDbContext dbData)
         {
-            _dummyData = dummydata;
+            _dbData = dbData;
         }
         public IActionResult Index()
         {
-
-            return View(_dummyData.StudentList);
+            return View(_dbData.Students);
         }
-
         public IActionResult ShowDetail(int id)
         {
-            //Search for the student whose id matches the given id
-            Student? student = _dummyData.StudentList.FirstOrDefault(st => st.Id == id);
+            //Search for the instructor whose id matches the given id
+            Student? student = _dbData.Students.FirstOrDefault(st => st.Id == id);
 
-            if (student != null)//was an student found?
+            if (student != null)//was an instructor found?
                 return View(student);
 
             return NotFound();
@@ -31,23 +29,28 @@ namespace LabActivity.Controllers
         [HttpGet]
         public IActionResult AddStudent()
         {
-
             return View();
         }
-
         [HttpPost]
         public IActionResult AddStudent(Student newStudent)
         {
-            _dummyData.StudentList.Add(newStudent);
+            if (!ModelState.IsValid)
+            {
+                return View();
+                _dbData.Students.Add(newStudent);
+                return RedirectToAction("Index");
+            }
+            _dbData.Students.Add(newStudent);
+            _dbData.SaveChanges();
             return RedirectToAction("Index");
         }
         [HttpGet]
         public IActionResult UpdateStudent(int id)
-        {
-            //Search for the student whose id matches the given id
-            Student? student = _dummyData.StudentList.FirstOrDefault(st => st.Id == id);
+        {   
+            //Search for the instructor whose id matches the given id
+            Student? student = _dbData.Students.FirstOrDefault(st => st.Id == id);
 
-            if (student != null)//was an student found?
+            if (student != null)//was an instructor found?
                 return View(student);
 
             return NotFound();
@@ -55,35 +58,42 @@ namespace LabActivity.Controllers
         [HttpPost]
         public IActionResult UpdateStudent(Student studentChanges)
         {
-            Student? student = _dummyData.StudentList.FirstOrDefault(st => st.Id == studentChanges.Id);
+            Student? student = _dbData.Students.FirstOrDefault(st => st.Id == studentChanges.Id);
+
             if (student != null)
             {
                 student.FirstName = studentChanges.FirstName;
                 student.LastName = studentChanges.LastName;
                 student.Email = studentChanges.Email;
-                student.Course = studentChanges.Course;
                 student.AdmissionDate = studentChanges.AdmissionDate;
                 student.GPA = studentChanges.GPA;
+                student.Course = studentChanges.Course;
+                _dbData.SaveChanges();
             }
             return RedirectToAction("Index");
         }
         [HttpGet]
         public IActionResult DeleteStudent(int id)
         {
-            //Search for the student whose id matches the given id
-            Student? student = _dummyData.StudentList.FirstOrDefault(st => st.Id == id);
+            //Search for the instructor whose id matches the given id
+            Student? student = _dbData.Students.FirstOrDefault(st => st.Id == id);
 
-            if (student != null)//was an student found?
+            if (student != null)//was an instructor found?
                 return View(student);
 
             return NotFound();
         }
+
         [HttpPost]
         public IActionResult DeleteStudent(Student newStudent)
+
         {
-            Student? student = _dummyData.StudentList.FirstOrDefault(st => st.Id == newStudent.Id);
-            if (student != null)
-                _dummyData.StudentList.Remove(student);
+            //Search for the instructor whose id matches the given id
+            Student? student = _dbData.Students.FirstOrDefault(st => st.Id == newStudent.Id);
+
+            if (student != null)//was an instructor found?
+                _dbData.Students.Remove(student);
+            _dbData.SaveChanges();
             return RedirectToAction("Index");
         }
     }

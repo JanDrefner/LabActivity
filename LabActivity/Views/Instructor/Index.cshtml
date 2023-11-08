@@ -9,7 +9,7 @@
 <table class="table table-dark table-hover">
 
     <tr>
-        <th colspan="9">Instructor</th>
+        <th colspan="11">Instructor</th>
     </tr>
 
     <tr>
@@ -19,6 +19,7 @@
         <th>Status</th>
         <th>Instructor Rank</th>
         <th>Hiring Date</th>
+        <th>Phone Number</th>
         <th>Instructor Details</th>
         <th>Edit</th>
         <th>Delete</th>
@@ -33,6 +34,7 @@
             <td>@status</td>
             <td>@Instructor.InstructorRank</td>
             <td>@Instructor.HiringDate</td>
+            <td>@Instructor.PhoneNumber</td>
             <td><a class="btn btn-primary" asp-action="ShowDetail" asp-route-id ="@Instructor.Id">Show Details</a></td>
             <td><a class="btn btn-info" asp-action="UpdateInstructor" asp-route-id="@Instructor.Id">Update</a></td>
             <td><a class="btn btn-danger" asp-action="DeleteInstructor" asp-route-id="@Instructor.Id">Delete</a></td>

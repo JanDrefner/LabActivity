@@ -4,10 +4,6 @@
 <h1>Update Student</h1>
 <form asp-action="UpdateStudent" asp-controller="Student" method="post">
     <div class="row">
-        <div class="form-group col">
-            <label asp-for="Id" readonly>ID Number</label>
-            <input class="form-control" asp-for="Id" aria-describedby="IdHelp" readonly>
-        </div>
         <br />
         <div class="form-group col">
             <label asp-for="FirstName">First Name</label>
@@ -21,9 +17,15 @@
     </div>
 
     <br />
-    <div class="form-group">
-        <label asp-for="Email">Email</label>
-        <input class="form-control" asp-for="Email" autocomplete="off">
+    <div class="row">
+        <div class="form-group col">
+            <label asp-for="Email"></label>
+            <input class="form-control" asp-for="Email" autocomplete="off">
+        </div>
+        <div class="form-group col">
+            <label asp-for="PhoneNumber"></label>
+            <input class="form-control" asp-for="PhoneNumber" autocomplete="off">
+        </div>
     </div>
     <br />
     <div class="row">
